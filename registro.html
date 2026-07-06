@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Global Tech</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 30%, #0f172a 100%);
+            --card-glass: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-gold: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-light); min-height: 100vh; }
+        
+        nav { background: rgba(255, 255, 255, 0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; flex-direction: column; text-decoration: none; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #0f172a; }
+        .logo span { color: #0284c7; }
+        .logo-subtitle { font-size: 0.75rem; color: #64748b; font-weight: 600; margin-left: 34px; margin-top: -2px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #475569; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover, .nav-links a.active { color: #0284c7; }
+
+        .form-container { max-width: 650px; margin: 50px auto; padding: 40px; background: var(--card-glass); border: 1px solid var(--card-border); border-radius: 16px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        h1 { font-size: 2rem; text-transform: uppercase; margin-bottom: 10px; text-align: center; }
+        .desc { text-align: center; color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; }
+        
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select { background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; color: white; outline: none; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { border-color: #0284c7; }
+        .form-group option { background: #0f172a; color: white; }
+        .form-group optgroup { background: #0f172a; color: var(--accent-gold); font-weight: 700; font-style: normal; }
+        
+        .btn-submit { background: var(--accent-gold); color: #0f172a; border: none; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 10px; transition: transform 0.2s; font-size: 1rem;}
+        .btn-submit:hover { transform: translateY(-2px); }
+        
+        /* Mensaje de Éxito */
+        .success-message { display: none; background: rgba(34, 197, 94, 0.2); border: 1px solid #22c55e; color: #f8fafc; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; font-weight: 600; }
+
+        .sub-footer { background: #070b13; text-align: center; padding: 25px 20px; font-size: 0.85rem; color: #475569; margin-top: 50px;}
+        .sub-footer p { margin-bottom: 0; font-size: 0.85rem; }
+        .sub-footer .footer-sub { display: block; color: #64748b; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <div class="logo">📐 Global <span>Tech</span></div>
+            <div class="logo-subtitle">Centro de Certificación Internacional</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="certificaciones.html">Certificaciones</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="registro.html" class="active">Registro</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <h1>Formulario de Registro</h1>
+        <p class="desc">Separa tu cupo o regístrate para la convocatoria del examen oficial.</p>
+        
+        <div class="success-message" id="successAlert">
+            ¡Registro exitoso! Tus datos han sido guardados correctamente.
+        </div>
+        
+        <form id="registrationForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe9cApzrFEAqOMredhdV_3RF4-PnFxhrgkIISRP3NybqgIrvA/formResponse" method="POST" style="display: flex; flex-direction: column;">
+            
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" name="entry.860712800" placeholder="Ej. Juan Pérez" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" name="entry.357115052" placeholder="juan@ejemplo.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Teléfono / WhatsApp</label>
+                <input type="tel" name="entry.295419247" placeholder="+51 999 999 999" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Certificación de Interés</label>
+                <select name="entry.16975335" required>
+                    <option value="">Selecciona una opción</option>
+                    
+                    <optgroup label="Microsoft Office Specialist (MOS)">
+                        <option value="MOS: Word Associate">Word Associate</option>
+                        <option value="MOS: Excel Associate">Excel Associate</option>
+                        <option value="MOS: PowerPoint Associate">PowerPoint Associate</option>
+                        <option value="MOS: Outlook Associate">Outlook Associate</option>
+                        <option value="MOS: Excel for Business Finance Associate">Excel for Business Finance Associate</option>
+                        <option value="MOS: Excel for Accounting Associate">Excel for Accounting Associate</option>
+                        <option value="MOS: Excel for Operational Management">Excel for Operational Management</option>
+                        <option value="MOS: Word Expert">Word Expert</option>
+                        <option value="MOS: Access Expert">Access Expert</option>
+                        <option value="MOS: Excel Expert">Excel Expert</option>
+                        <option value="MOS Título: Associate">Título MOS Associate</option>
+                        <option value="MOS Título: Expert">Título MOS Expert</option>
+                    </optgroup>
+
+                    <optgroup label="Microsoft Certified Fundamentals">
+                        <option value="Microsoft: Azure AI Fundamentals (AI-901)">Azure AI Fundamentals (AI-901)</option>
+                        <option value="Microsoft: Azure Fundamentals (AZ-900)">Azure Fundamentals (AZ-900)</option>
+                        <option value="Microsoft: Azure Data Fundamentals (DP-900)">Azure Data Fundamentals (DP-900)</option>
+                        <option value="Microsoft: 365 Fundamentals (MS-900)">365 Fundamentals (MS-900)</option>
+                        <option value="Microsoft: Dynamics 365 Fundamentals CRM (MB-910)">Dynamics 365 Fundamentals CRM (MB-910)</option>
+                        <option value="Microsoft: Dynamics 365 Fundamentals ERP (MB-920)">Dynamics 365 Fundamentals ERP (MB-920)</option>
+                        <option value="Microsoft: Copilot and Agent Administration Fundamentals (AB-900)">Copilot and Agent Administration Fundamentals (AB-900)</option>
+                        <option value="Microsoft: Security, Compliance, and Identity Fundamentals (SC-900)">Security, Compliance, and Identity Fundamentals (SC-900)</option>
+                        <option value="Microsoft: Power Platform Fundamentals (PL-900)">Power Platform Fundamentals (PL-900)</option>
+                        <option value="Microsoft Certified Educator">Microsoft Certified Educator</option>
+                    </optgroup>
+
+                    <optgroup label="Adobe Certified Professional">
+                        <option value="Adobe: Visual Design Using Adobe Photoshop">Visual Design Using Adobe Photoshop</option>
+                        <option value="Adobe: Graphic Design & Illustration Using Adobe Illustrator">Graphic Design & Illustration Using Adobe Illustrator</option>
+                        <option value="Adobe: Print & Digital Media Publication Using Adobe InDesign">Print & Digital Media Publication Using Adobe InDesign</option>
+                        <option value="Adobe: Digital Video Using Adobe Premiere Pro">Digital Video Using Adobe Premiere Pro</option>
+                        <option value="Adobe: Web Authoring Using Adobe Dreamweaver">Web Authoring Using Adobe Dreamweaver</option>
+                        <option value="Adobe: Multiplatform Animation Using Adobe Animate">Multiplatform Animation Using Adobe Animate</option>
+                        <option value="Adobe: Visual Effects & Motion Graphics Using Adobe After Effects">Visual Effects & Motion Graphics Using Adobe After Effects</option>
+                        <option value="Adobe: Content Creation & Marketing Using Adobe Express">Content Creation & Marketing Using Adobe Express</option>
+                        <option value="Adobe: Document Creation & Management Using Adobe Acrobat Pro">Document Creation & Management Using Adobe Acrobat Pro</option>
+                        <option value="Adobe: Design and edit with AI using Adobe FireFly">Design and edit with AI using Adobe FireFly</option>
+                        <option value="Adobe Título: Visual Designer">Título Visual Designer</option>
+                        <option value="Adobe Título: Web Designer">Título Web Designer</option>
+                        <option value="Adobe Título: Video Design">Título Video Design</option>
+                        <option value="Adobe Título: Marketing Design">Título Marketing Design</option>
+                    </optgroup>
+
+                    <optgroup label="Intuit">
+                        <option value="Intuit: QuickBooks Certified User Online">QuickBooks Certified User Online</option>
+                        <option value="Intuit: Personal Finance">Personal Finance</option>
+                        <option value="Intuit: Certified Bookkeeping Professional">Certified Bookkeeping Professional</option>
+                        <option value="Intuit: Design for Delight Innovator (Design Thinking)">Design for Delight Innovator (Design Thinking)</option>
+                    </optgroup>
+
+                    <optgroup label="Information Technology Specialist">
+                        <option value="IT Specialist: Databases">Databases</option>
+                        <option value="IT Specialist: Software Development">Software Development</option>
+                        <option value="IT Specialist: Networking">Networking</option>
+                        <option value="IT Specialist: Network Security">Network Security</option>
+                        <option value="IT Specialist: JavaScript">JavaScript</option>
+                        <option value="IT Specialist: Java">Java</option>
+                        <option value="IT Specialist: Python">Python</option>
+                        <option value="IT Specialist: HTML and CSS">HTML and CSS</option>
+                        <option value="IT Specialist: HTML5 Application Development">HTML5 Application Development</option>
+                        <option value="IT Specialist: Device Configuration and Management">Device Configuration and Management</option>
+                        <option value="IT Specialist: Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="IT Specialist: Cloud Computing">Cloud Computing</option>
+                        <option value="IT Specialist: Computational Thinking">Computational Thinking</option>
+                        <option value="IT Specialist: Cybersecurity">Cybersecurity</option>
+                        <option value="IT Specialist: Data Analytics">Data Analytics</option>
+                    </optgroup>
+
+                    <optgroup label="Cisco Certified Support Technician">
+                        <option value="Cisco: CCST IT Support">CCST IT Support</option>
+                        <option value="Cisco: CCST Networking">CCST Networking</option>
+                        <option value="Cisco: CCST Cybersecurity">CCST Cybersecurity</option>
+                    </optgroup>
+
+                    <optgroup label="Swift by Apple">
+                        <option value="Apple: App Development with Swift Associate">App Development with Swift Associate</option>
+                        <option value="Apple: App Development with Swift Certified User">App Development with Swift Certified User</option>
+                    </optgroup>
+
+                    <optgroup label="Autodesk Certified User">
+                        <option value="Autodesk: AutoCAD (Dibujo Técnico)">AutoCAD (Dibujo Técnico)</option>
+                        <option value="Autodesk: Inventor Imperial or Metric">Inventor Imperial or Metric</option>
+                        <option value="Autodesk: Revit - Imperial or Metric (BIM)">Revit - Imperial or Metric (Construcción Inteligente BIM)</option>
+                        <option value="Autodesk: 3ds Max (Cine)">3ds Max (Cine)</option>
+                        <option value="Autodesk: Maya (Cine)">Maya (Cine)</option>
+                        <option value="Autodesk: Fusion 360 (Fabricación 3d)">Fusion 360 (Fabricación 3d)</option>
+                        <option value="Autodesk: Tinkercad">Tinkercad</option>
+                    </optgroup>
+
+                    <optgroup label="Unity Certified User">
+                        <option value="Unity: Programmer">Programmer</option>
+                        <option value="Unity: VR Developer (Realidad Virtual)">VR Developer (Realidad Virtual)</option>
+                        <option value="Unity: Artist">Artist</option>
+                    </optgroup>
+
+                    <optgroup label="IC3 Digital Literacy">
+                        <option value="IC3: Digital Literacy Global Standard Six">Global Standard Six</option>
+                        <option value="IC3: Digital Literacy Global Standard Five">Global Standard Five</option>
+                    </optgroup>
+
+                    <optgroup label="Meta Certification">
+                        <option value="Meta: Certified Digital Marketing Associate">Certified Digital Marketing Associate</option>
+                    </optgroup>
+
+                    <optgroup label="PMI Project Management Ready">
+                        <option value="PMI: Project Management Ready">PMI Project Management Ready</option>
+                    </optgroup>
+
+                    <optgroup label="Entrepreneurship and Small Business (ESB)">
+                        <option value="ESB: Emprendedor Sostenible para Pequeños Negocios">Emprendedor Sostenible para Pequeños Negocios</option>
+                        <option value="ESB: Entrepreneurship and Small Business">Entrepreneurship and Small Business</option>
+                        <option value="ESB: Master Certification in Entrepreneurship">Master Certification in Entrepreneurship</option>
+                    </optgroup>
+
+                    <optgroup label="Knowledge Pillars">
+                        <option value="Knowledge Pillars: WordPress Certifications Distribution">WordPress Certifications Distribution</option>
+                    </optgroup>
+
+                    <optgroup label="Otras Carreras / Certificaciones">
+                        <option value="Agriscience: Agriscience Foundations">Agriscience Foundations</option>
+                        <option value="Health Sciences: Medical Administrative Assistant Certification">Medical Administrative Assistant Certification</option>
+                        <option value="Critical Career Skills: Generative AI">Generative AI (Creación de Modelos de IA Generativa)</option>
+                        <option value="Critical Career Skills: Professional Communication">Professional Communication (Comunicación Efectiva)</option>
+                        <option value="Hospitality & Culinary: Culinary Foundations">Culinary Foundations</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-submit" id="submitBtn">Enviar Inscripción</button>
+        </form>
+    </div>
+
+    <div class="sub-footer">
+        <p>&copy; 2026 Global Tech. Todos los derechos reservados.</p>
+        <span class="footer-sub">Centro de Certificación Internacional</span>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            const form = this;
+            const submitBtn = document.getElementById('submitBtn');
+            const successAlert = document.getElementById('successAlert');
+            
+            submitBtn.innerText = "Enviando...";
+            submitBtn.disabled = true;
+
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden_iframe';
+            iframe.id = 'hidden_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            form.target = 'hidden_iframe';
+
+            iframe.onload = function() {
+                successAlert.style.display = 'block';
+                form.reset();
+                submitBtn.innerText = "Enviar Inscripción";
+                submitBtn.disabled = false;
+                setTimeout(() => { iframe.remove(); }, 1000);
+            };
+        });
+    </script>
+</body>
+</html>

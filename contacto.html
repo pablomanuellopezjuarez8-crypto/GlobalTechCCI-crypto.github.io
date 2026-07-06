@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Global Tech</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 30%, #0f172a 100%);
+            --card-glass: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+            --whatsapp-green: #22c55e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        nav { background: rgba(255, 255, 255, 0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; flex-direction: column; text-decoration: none; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #0f172a; }
+        .logo span { color: #0284c7; }
+        .logo-subtitle { font-size: 0.75rem; color: #64748b; font-weight: 600; margin-left: 34px; margin-top: -2px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #475569; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover, .nav-links a.active { color: #0284c7; }
+
+        .contact-container { max-width: 1000px; margin: 60px auto; padding: 0 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; width: 100%; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; grid-column: 1 / -1; text-align: center; margin-bottom: 20px;}
+        
+        .info-box { background: var(--card-glass); border: 1px solid var(--card-border); padding: 40px; border-radius: 16px; backdrop-filter: blur(10px); }
+        .info-box h3 { font-size: 1.4rem; margin-bottom: 20px; color: #38bdf8; }
+        .info-item { margin-bottom: 20px; font-size: 1.1rem; }
+        .info-item strong { color: white; display: block; margin-bottom: 4px;}
+        
+        .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: var(--whatsapp-green); color: white; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 700; margin-top: 15px; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); }
+
+        .sub-footer { background: #070b13; text-align: center; padding: 25px 20px; font-size: 0.85rem; color: #475569; margin-top: auto;}
+        .sub-footer p { margin-bottom: 0; font-size: 0.85rem; }
+        .sub-footer .footer-sub { display: block; color: #64748b; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <div class="logo">📐 Global <span>Tech</span></div>
+            <div class="logo-subtitle">Centro de Certificación Internacional</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="certificaciones.html">Certificaciones</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="registro.html">Registro</a></li>
+            <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="contact-container">
+        <h1>Centro de Contacto</h1>
+        
+        <div class="info-box">
+            <h3>Canales Oficiales</h3>
+            <div class="info-item">
+                <strong>📧 Correo Corporativo</strong>
+                soporte@certificadointernacional.com
+            </div>
+            <div class="info-item">
+                <strong>📍 Oficina Central</strong>
+                Av. Larco 456, Trujillo, Perú.
+            </div>
+            <div class="info-item">
+                <strong>⏰ Horario de Atención</strong>
+                Lunes a Viernes: 9:00 AM - 6:00 PM
+            </div>
+        </div>
+
+        <div class="info-box" style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+            <h3>Soporte Inmediato</h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">¿Tienes dudas sobre los costos, fechas de exámenes o pre-requisitos? Chatea de inmediato con un asesor de admisiones.</p>
+            <a href="https://wa.me/51967890050?text=Hola,%20deseo%20mayor%20información" class="btn-wa" target="_blank">
+                Chatear por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <div class="sub-footer">
+        <p>&copy; 2026 Global Tech. Todos los derechos reservados.</p>
+        <span class="footer-sub">Centro de Certificación Internacional</span>
+    </div>
+
+</body>
+</html>

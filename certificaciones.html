@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificaciones Oficiales | Global Tech</title>
+    <style>
+        /* Paleta de Colores y Base Premium */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 30%, #0f172a 100%);
+            --card-glass: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-gold: #f59e0b;
+            --accent-blue: #38bdf8;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra de Navegación */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.6rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+        }
+
+        .logo-title span { color: #0284c7; }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #0284c7;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 50px 5%;
+            flex-grow: 1;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 15px;
+        }
+
+        .header-section p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Barra de Filtros Dinámicos (Marcas) */
+        .filter-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 10px 5px 25px;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+        }
+
+        .filter-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .filter-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid var(--card-border);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--white);
+            color: #0f172a;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Grid de Certificaciones */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjeta de Certificación con Animación */
+        .cert-card {
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            animation: fadeIn 0.5s ease backwards;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .brand-badge {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Colores dinámicos por marca */
+        .cert-card[data-brand="microsoft"] .brand-badge { color: #38bdf8; background: rgba(56,189,248,0.15); }
+        .cert-card[data-brand="adobe"] .brand-badge { color: #f43f5e; background: rgba(244,63,94,0.15); }
+        .cert-card[data-brand="autodesk"] .brand-badge { color: #22c55e; background: rgba(34,197,94,0.15); }
+        .cert-card[data-brand="cisco"] .brand-badge { color: #6366f1; background: rgba(99,102,241,0.15); }
+        .cert-card[data-brand="intuit"] .brand-badge { color: #eab308; background: rgba(234,179,8,0.15); }
+
+        .type-badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            background: var(--accent-gold);
+            color: #0f172a;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .cert-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .cert-details {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            list-style-type: square;
+            padding-left: 18px;
+        }
+
+        .cert-details li {
+            margin-bottom: 5px;
+        }
+
+        .btn-action {
+            background: #0284c7;
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            transition: background 0.2s;
+            margin-top: auto;
+        }
+
+        .btn-action:hover {
+            background: #0369a1;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer de Copyright */
+        .sub-footer {
+            background: #070b13;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #475569;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <span class="logo-icon">📐</span>
+            <div class="logo-text">
+                <div class="logo-title">Global <span>Tech</span></div>
+                <div class="logo-subtitle">Centro de Certificación Internacional</div>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="certificaciones.html" class="active">Certificaciones</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="registro.html">Registro</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Portafolio Global Tech</h1>
+            <p>Explora las certificaciones oficiales e internacionales avaladas por la industria 5.0. Selecciona una categoría para filtrar dinámicamente.</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterCerts('all')">🌟 Todas</button>
+            <button class="filter-btn" onclick="filterCerts('microsoft')">🖥️ Microsoft</button>
+            <button class="filter-btn" onclick="filterCerts('adobe')">🎨 Adobe</button>
+            <button class="filter-btn" onclick="filterCerts('cisco')">🌐 Cisco Systems</button>
+            <button class="filter-btn" onclick="filterCerts('autodesk')">🏗️ Autodesk</button>
+            <button class="filter-btn" onclick="filterCerts('it-specialist')">💻 IT Specialist</button>
+            <button class="filter-btn" onclick="filterCerts('intuit')">📊 Intuit</button>
+            <button class="filter-btn" onclick="filterCerts('otras')">🚀 Otras Especialidades</button>
+        </div>
+
+        <div class="certifications-grid" id="certs-container">
+            
+            <div class="cert-card" data-brand="microsoft">
+                <div class="cert-header">
+                    <span class="brand-badge">Microsoft</span>
+                    <span class="type-badge">MOS 365/2019</span>
+                </div>
+                <div class="cert-title">Microsoft Office Specialist</div>
+                <ul class="cert-details">
+                    <li>Word & Excel (Associate / Expert)</li>
+                    <li>PowerPoint & Outlook Associate</li>
+                    <li>Excel for Accounting & Finance</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="microsoft">
+                <div class="cert-header">
+                    <span class="brand-badge">Microsoft</span>
+                    <span class="type-badge">Fundamentals</span>
+                </div>
+                <div class="cert-title">Azure & Cloud Certified</div>
+                <ul class="cert-details">
+                    <li>Azure AI Fundamentals (AI-901)</li>
+                    <li>Azure Data (DP-900) & Cloud (AZ-900)</li>
+                    <li>Copilot and Agent Administration (AB-900)</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="adobe">
+                <div class="cert-header">
+                    <span class="brand-badge">Adobe</span>
+                    <span class="type-badge">Professional</span>
+                </div>
+                <div class="cert-title">Adobe Certified Professional</div>
+                <ul class="cert-details">
+                    <li>Visual Design (Photoshop)</li>
+                    <li>Graphic Design & Illustration (Illustrator)</li>
+                    <li>Digital Video (Premiere Pro / After Effects)</li>
+                    <li>Design & edit with AI using Adobe FireFly</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="cisco">
+                <div class="cert-header">
+                    <span class="brand-badge">Cisco</span>
+                    <span class="type-badge">Microcareer</span>
+                </div>
+                <div class="cert-title">Certified Support Technician</div>
+                <ul class="cert-details">
+                    <li>CCST IT Support</li>
+                    <li>CCST Networking</li>
+                    <li>CCST Cybersecurity</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="autodesk">
+                <div class="cert-header">
+                    <span class="brand-badge">Autodesk</span>
+                    <span class="type-badge">BIM & Cine</span>
+                </div>
+                <div class="cert-title">Autodesk Certified User</div>
+                <ul class="cert-details">
+                    <li>AutoCAD (Dibujo Técnico)</li>
+                    <li>Revit (Construcción Inteligente BIM)</li>
+                    <li>3ds Max & Maya (Cine y Animación)</li>
+                    <li>¡Nueva! Tinkercad Certification</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="it-specialist">
+                <div class="cert-header">
+                    <span class="brand-badge">IT Specialist</span>
+                    <span class="type-badge">Code & Core</span>
+                </div>
+                <div class="cert-title">Information Technology Specialist</div>
+                <ul class="cert-details">
+                    <li>Python, Java, JavaScript, HTML y CSS</li>
+                    <li>Databases & Software Development</li>
+                    <li>Artificial Intelligence & Cloud Computing</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="intuit">
+                <div class="cert-header">
+                    <span class="brand-badge">Intuit</span>
+                    <span class="type-badge">Finanzas</span>
+                </div>
+                <div class="cert-title">Intuit Certified User</div>
+                <ul class="cert-details">
+                    <li>QuickBooks Certified User Online</li>
+                    <li>Personal Finance & Bookkeeping</li>
+                    <li>Design for Delight Innovator (Design Thinking)</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="otras">
+                <div class="cert-header">
+                    <span class="brand-badge">Meta / PMI</span>
+                    <span class="type-badge">Especialidades</span>
+                </div>
+                <div class="cert-title">Business & Management Ready</div>
+                <ul class="cert-details">
+                    <li>Meta Certified Digital Marketing Associate</li>
+                    <li>PMI Project Management Ready</li>
+                    <li>Entrepreneurship and Small Business (ESB)</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+            <div class="cert-card" data-brand="otras">
+                <div class="cert-header">
+                    <span class="brand-badge">Unity / IC3</span>
+                    <span class="type-badge">Gaming & Digital</span>
+                </div>
+                <div class="cert-title">Digital Literacy & Gaming</div>
+                <ul class="cert-details">
+                    <li>Unity Certified User (Programmer / VR Developer)</li>
+                    <li>IC3 Digital Literacy (Global Standard 5 / 6)</li>
+                    <li>Critical Career Skills (Generative AI)</li>
+                </ul>
+                <a href="registro.html" class="btn-action">Solicitar Examen</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sub-footer">
+        <p>&copy; 2026 Global Tech - Centro de Certificación Internacional. Todos los derechos reservados.</p>
+    </div>
+
+    <script>
+        function filterCerts(brand) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.cert-card');
+            cards.forEach(card => {
+                card.style.display = 'none';
+                if (brand === 'all' || card.getAttribute('data-brand') === brand) {
+                    setTimeout(() => {
+                        card.style.display = 'flex';
+                    }, 10);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

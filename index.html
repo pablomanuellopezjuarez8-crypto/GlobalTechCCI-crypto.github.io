@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Tech | Centro de Certificación Internacional</title>
+    <style>
+        /* Estilos Base y Paleta Premium */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 30%, #0f172a 100%);
+            --card-glass: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-gold: #f59e0b;
+            --whatsapp-green: #22c55e;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Barra de Navegación Superior */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+        }
+
+        .logo-main span {
+            color: #0284c7;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #0284c7;
+        }
+
+        .nav-search {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Sección Principal Hero */
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 5% 40px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .hero-text .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 540px;
+        }
+
+        .btn-more {
+            background-color: var(--accent-gold);
+            color: #0f172a;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+        }
+
+        .hero-graphics {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 400px;
+        }
+
+        .avatar-group {
+            display: flex;
+            align-items: flex-end;
+            gap: -20px;
+        }
+
+        .avatar-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+
+        .avatar-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .avatar-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            margin-bottom: 15px;
+        }
+
+        .avatar-card .badge-cert {
+            background: var(--white);
+            color: #0f172a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .category-tabs {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tab-button {
+            background: var(--white);
+            color: #0f172a;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-4px);
+            background-color: #f8fafc;
+        }
+
+        .tab-button span.icon {
+            font-size: 1.8rem;
+        }
+
+        .section-title {
+            max-width: 1300px;
+            margin: 40px auto 25px;
+            padding: 0 5%;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .programs-grid {
+            max-width: 1300px;
+            margin: 0 auto 60px;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .program-card {
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #22c55e;
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .program-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .btn-details {
+            background: #0284c7;
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .btn-details:hover {
+            background: #0369a1;
+        }
+
+        .whatsapp-sidebar-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-sidebar-box h4 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-wa-action {
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-wa-action:hover {
+            transform: scale(1.03);
+        }
+
+        .footer-cta {
+            background: #0b111e;
+            padding: 40px 5%;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-cta-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-cta h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-form input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--card-border);
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: white;
+            outline: none;
+            min-width: 240px;
+        }
+
+        .subscribe-form input:focus {
+            border-color: #0284c7;
+        }
+
+        .btn-footer-submit {
+            background: var(--white);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .sub-footer {
+            background: #070b13;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .sub-footer .footer-logo {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .sub-footer .footer-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 968px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-text p { margin: 0 auto 30px; }
+            .hero-graphics { display: none; }
+            .category-tabs { grid-template-columns: 1fr; }
+            .footer-cta-container { flex-direction: column; text-align: center; }
+            .nav-links, .nav-search { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-main">📐 Global <span>Tech</span></div>
+            <div class="logo-sub">Centro de Certificación Internacional</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="certificaciones.html">Certificaciones</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="registro.html">Registro</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <div class="nav-search">
+            <input type="text" placeholder="Buscar...">
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1>Global Tech</h1>
+            <div class="hero-subtitle">Centro de Certificación Internacional</div>
+            <p>Impulsa tu futuro. Valida tus competencias a nivel global con nuestro portafolio de exámenes oficiales de alta demanda corporativa.</p>
+            <a href="certificaciones.html" class="btn-more">Más Información</a>
+        </div>
+        
+        <div class="hero-graphics">
+            <div class="avatar-group">
+                <div class="avatar-card" style="margin-right: -15px; z-index: 1;">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" alt="Profesional TI">
+                    <h4>Ingeniería</h4>
+                    <span class="badge-cert">Swift Cert</span>
+                </div>
+                <div class="avatar-card" style="transform: translateY(-20px); z-index: 2; background: rgba(255,255,255,0.15);">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200" alt="Gestor de proyectos">
+                    <h4>Especialista</h4>
+                    <span class="badge-cert">PMI Project</span>
+                </div>
+                <div class="avatar-card" style="margin-left: -15px; z-index: 1;">
+                    <img src="https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=200" alt="Salud">
+                    <h4>Medicina</h4>
+                    <span class="badge-cert">Salud Cert</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-tabs">
+        <a href="certificaciones.html" class="tab-button">
+            <span class="icon">💻</span>
+            <span>Tecnología & TI</span>
+        </a>
+        <a href="certificaciones.html" class="tab-button">
+            <span class="icon">🎨</span>
+            <span>Diseño & Multimedia</span>
+        </a>
+        <a href="certificaciones.html" class="tab-button">
+            <span class="icon">📊</span>
+            <span>Negocios & Gestión</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">Programas Destacados</h2>
+
+    <div class="programs-grid">
+        <div class="program-card">
+            <span class="status-badge">Activo</span>
+            <div>
+                <div class="brand-title" style="color: #e11d48;">Cisco</div>
+                <div class="program-name">Cisco Certified Support Technician</div>
+            </div>
+            <a href="contacto.html" class="btn-details">Ver Detalles</a>
+        </div>
+
+        <div class="program-card">
+            <span class="status-badge">Activo</span>
+            <div>
+                <div class="brand-title" style="color: #0284c7;">∞ Meta</div>
+                <div class="program-name">Meta Certified Professional</div>
+            </div>
+            <a href="contacto.html" class="btn-details">Ver Detalles</a>
+        </div>
+
+        <div class="program-card">
+            <span class="status-badge">Activo</span>
+            <div>
+                <div class="brand-title" style="color: #f59e0b;">PMI</div>
+                <div class="program-name">Project Management Institute</div>
+            </div>
+            <a href="contacto.html" class="btn-details">Ver Detalles</a>
+        </div>
+
+        <div class="whatsapp-sidebar-box">
+            <h4>Solicita Información / WhatsApp</h4>
+            <a href="https://wa.me/51967890050?text=Hola,%20deseo%20mayor%20información%20sobre%20Global%20Tech%20-%20Centro%20de%20Certificación%20Internacional" class="btn-wa-action" target="_blank">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-top:2px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.973 0c3.184.001 6.177 1.242 8.43 3.496 2.253 2.253 3.492 5.247 3.491 8.432-.004 6.621-5.34 11.97-11.914 11.97-1.986-.001-3.932-.493-5.662-1.429L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437 0 9.857-4.42 9.86-9.858.002-2.634-1.023-5.11-2.885-6.974-1.862-1.863-4.337-2.887-6.971-2.888-5.442 0-9.863 4.421-9.866 9.86-.001 1.7.47 3.359 1.365 4.817L1.93 21.17l4.717-1.236zm12.333-6.52c-.31-.154-1.834-.905-2.119-1.01-.284-.104-.49-.154-.696.154-.206.31-.796.996-.975 1.204-.179.207-.358.233-.668.08-1.57-.788-2.607-1.393-3.64-3.177-.272-.468.272-.434.778-1.446.084-.17.042-.318-.02-.443-.062-.125-.492-1.187-.674-1.624-.177-.426-.355-.368-.489-.375-.127-.007-.272-.007-.418-.007-.145 0-.382.055-.582.273-.2.218-.765.748-.765 1.822 0 1.074.78 2.114.89 2.262.11.147 1.534 2.342 3.716 3.283.519.224.924.358 1.24.458.522.165.997.142 1.373.086.419-.062 1.283-.524 1.464-1.03.18-.506.18-.939.126-1.03-.053-.093-.207-.154-.516-.308z"/></svg>
+                Habla con un asesor ahora
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-cta">
+        <div class="footer-cta-container">
+            <div>
+                <h3>Suscríbete para Novedades</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Recibe cronogramas y descuentos directamente en tu bandeja.</p>
+            </div>
+            <form action="#" method="POST" class="subscribe-form">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <button type="submit" class="btn-footer-submit">Suscribirme</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="sub-footer">
+        <div class="footer-logo">Global Tech</div>
+        <div class="footer-sub">Centro de Certificación Internacional</div>
+        <p>&copy; 2026 Todos los derechos reservados.</p>
+    </div>
+
+</body>
+</html>
