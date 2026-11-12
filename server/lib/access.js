@@ -2,6 +2,7 @@ import { query } from '../db.js';
 
 export async function profileFor(user) {
   if (!user) return null;
+  if (user.role === 'admin') return { admin: true };
   if (user.role === 'docente') {
     const { rows } = await query(
       `SELECT c.id, c.name, c.grade, count(cs.student_id)::int AS students

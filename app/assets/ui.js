@@ -1,6 +1,11 @@
 import { downloadReport } from './api.js';
 
-export const ROLE_LABEL = { docente: 'Docente', estudiante: 'Estudiante', familia: 'Familia' };
+export const ROLE_LABEL = {
+  docente: 'Docente',
+  estudiante: 'Estudiante',
+  familia: 'Familia',
+  admin: 'Administrador',
+};
 
 export function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) =>

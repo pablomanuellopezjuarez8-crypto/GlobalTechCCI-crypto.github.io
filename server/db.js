@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS users (
   name text NOT NULL,
   email text UNIQUE NOT NULL,
   password_hash text NOT NULL,
-  role text NOT NULL CHECK (role IN ('docente','estudiante','familia')),
+  role text NOT NULL CHECK (role IN ('docente','estudiante','familia','admin')),
   grade int,
   is_demo boolean NOT NULL DEFAULT false,
   created_at timestamptz NOT NULL DEFAULT now()
@@ -163,6 +163,12 @@ export async function waitForDb(attempts = 45) {
 
 export async function migrate() {
   await query(SCHEMA);
+  // Bases creadas antes del perfil de administrador: se amplía la restricción.
+  await query(`
+    ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
+    ALTER TABLE users ADD CONSTRAINT users_role_check
+      CHECK (role IN ('docente','estudiante','familia','admin'));
+  `);
 }
 
 function addDays(days) {
@@ -289,6 +295,21 @@ async function insertDemoSubmission({ assignment, studentId, kind, reading, ques
     ],
   );
   return rows[0];
+}
+
+// Cuenta de administrador: revisa los correos registrados en la aplicación.
+// Se puede cambiar con las variables ADMIN_EMAIL y ADMIN_PASSWORD.
+export async function ensureAdmin() {
+  const { rows } = await query("SELECT id FROM users WHERE role = 'admin' LIMIT 1");
+  if (rows.length) return;
+  const email = (process.env.ADMIN_EMAIL || 'admin@piensayresuelve.pe').trim();
+  const password = process.env.ADMIN_PASSWORD || demoPassword;
+  await query(
+    `INSERT INTO users (name, email, password_hash, role, grade)
+     VALUES ($1, $2, $3, 'admin', NULL)
+     ON CONFLICT (email) DO UPDATE SET role = 'admin'`,
+    ['Administrador', email, hashPassword(password)],
+  );
 }
 
 export async function seedDemoData() {

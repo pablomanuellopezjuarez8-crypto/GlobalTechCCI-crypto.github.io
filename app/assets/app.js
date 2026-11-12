@@ -1,6 +1,9 @@
 import { api } from './api.js';
 import { ROLE_LABEL, esc, toast } from './ui.js';
+import * as welcomeView from './views/welcome.js';
 import * as loginView from './views/login.js';
+import * as registerView from './views/register.js';
+import * as adminView from './views/admin.js';
 import * as student from './views/student.js';
 import * as teacher from './views/teacher.js';
 import * as family from './views/family.js';
@@ -22,10 +25,13 @@ const NAV_BY_ROLE = {
     { href: '#/docente/asignar', label: 'Asignar' },
   ],
   familia: [{ href: '#/familia', label: 'Mi familia' }],
+  admin: [{ href: '#/admin', label: 'Cuentas' }],
 };
 
 const routes = [
   { pattern: /^#\/login$/, view: loginView.render },
+  { pattern: /^#\/registro$/, view: registerView.render },
+  { pattern: /^#\/admin$/, view: adminView.render },
   { pattern: /^#\/estudiante$/, role: 'estudiante', view: student.home },
   { pattern: /^#\/actividad\/(\d+)$/, role: 'estudiante', view: student.activity },
   { pattern: /^#\/mis-resultados$/, role: 'estudiante', view: student.results },
@@ -43,7 +49,8 @@ export function homeFor(role) {
   if (role === 'docente') return '#/docente';
   if (role === 'familia') return '#/familia';
   if (role === 'estudiante') return '#/estudiante';
-  return '#/login';
+  if (role === 'admin') return '#/admin';
+  return '#/bienvenida';
 }
 
 function navigate(hash) {
@@ -114,11 +121,31 @@ function errorPanel(message) {
 async function render() {
   const hash = location.hash || '#/';
 
+  // Visitantes: bienvenida primero, luego ingreso, registro o acceso de administrador.
   if (!state.user) {
-    await loginView.render(view, ctx);
+    if (hash === '#/login') {
+      await loginView.render(view, ctx);
+      return;
+    }
+    if (hash === '#/registro') {
+      await registerView.render(view, ctx);
+      return;
+    }
+    if (hash === '#/admin') {
+      await adminView.render(view, ctx);
+      return;
+    }
+    await welcomeView.render(view, ctx);
     return;
   }
-  if (hash === '#/' || hash === '#/login' || hash === '' || hash === '#') {
+  if (
+    hash === '#/' ||
+    hash === '#/login' ||
+    hash === '#/registro' ||
+    hash === '#/bienvenida' ||
+    hash === '' ||
+    hash === '#'
+  ) {
     location.replace(homeFor(state.user.role));
     return;
   }

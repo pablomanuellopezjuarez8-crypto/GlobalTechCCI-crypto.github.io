@@ -452,6 +452,78 @@ html[data-contrast="alto"] .panel--accent {
   color: var(--muted);
 }
 
+/* ---------- Bienvenida ---------- */
+
+.welcome {
+  display: grid;
+  justify-items: start;
+  max-width: 44rem;
+  padding: clamp(1rem, 4vw, 3rem) 0;
+}
+
+.welcome__mark {
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.welcome .eyebrow {
+  margin: 0.6rem 0 0;
+}
+
+.welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.4rem 0 0.75rem;
+}
+
+/* ---------- Ingreso, registro y administrador ---------- */
+
+.auth--single {
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
+}
+
+.auth__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.auth__divider::before,
+.auth__divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--line);
+}
+
+.auth__google {
+  text-align: center;
+}
+
+.auth__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+}
+
+.auth__links a {
+  color: var(--brand-2);
+  font-weight: 600;
+}
+
+.admin-stats {
+  margin-top: 1.25rem;
+}
+
 /* ---------- Estadísticas ---------- */
 
 .stats {

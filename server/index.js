@@ -1,9 +1,11 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { waitForDb, migrate, seedDemoData } from './db.js';
+import { waitForDb, migrate, seedDemoData, ensureAdmin } from './db.js';
 import { attachUser } from './auth.js';
 import authRoutes from './routes/auth.js';
+import googleAuthRoutes from './routes/google.js';
+import adminRoutes from './routes/admin.js';
 import authoringRoutes from './routes/authoring.js';
 import learningRoutes from './routes/learning.js';
 import resultsRoutes from './routes/results.js';
@@ -18,7 +20,9 @@ app.set('trust proxy', true);
 app.use(express.json({ limit: '1mb' }));
 app.use(attachUser);
 
+app.use('/api/auth/google', googleAuthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/api', authoringRoutes);
 app.use('/api', learningRoutes);
 app.use('/api', resultsRoutes);
@@ -72,6 +76,7 @@ async function start() {
   await waitForDb();
   await migrate();
   await seedDemoData();
+  await ensureAdmin();
   app.listen(port, '0.0.0.0', () => {
     console.log(`Piensa y Resuelve escuchando en http://0.0.0.0:${port}`);
   });

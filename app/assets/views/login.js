@@ -3,8 +3,12 @@ import { esc } from '../ui.js';
 
 export async function render(view, ctx) {
   let demo = { accounts: [], password: '' };
+  let providers = { google: false };
   try {
-    demo = await api('/auth/demo-accounts');
+    [demo, providers] = await Promise.all([
+      api('/auth/demo-accounts'),
+      api('/auth/providers').catch(() => ({ google: false })),
+    ]);
   } catch (error) {
     demo = { accounts: [], password: '' };
   }
@@ -39,6 +43,23 @@ export async function render(view, ctx) {
           <p id="login-error" class="form-error" role="alert" hidden></p>
           <button class="btn btn--primary btn--block" type="submit" id="login-submit">Ingresar</button>
         </form>
+
+        ${
+          providers.google
+            ? `<div class="auth__divider"><span>o</span></div>
+               <a class="btn btn--ghost btn--block auth__google" href="/api/auth/google/start">Ingresar con Google</a>`
+            : `<div class="auth__divider"><span>o</span></div>
+               <button class="btn btn--ghost btn--block auth__google" type="button" disabled
+                       title="El ingreso con Google se activará cuando se configure la cuenta">
+                 Ingresar con Google
+               </button>
+               <p class="muted small">El ingreso con Google estará disponible al configurar la cuenta.</p>`
+        }
+
+        <p class="auth__links">
+          <a href="#/registro">Crear cuenta</a>
+          <a href="#/admin">Ingresar como administrador</a>
+        </p>
 
         ${
           demo.accounts.length
