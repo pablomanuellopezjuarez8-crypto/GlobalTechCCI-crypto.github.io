@@ -1,0 +1,19 @@
+{
+  "name": "piensa-y-resuelve",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicación educativa para pensamiento crítico, comprensión lectora y resolución de problemas",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "pdfkit": "0.15.0",
+    "pg": "8.11.5"
+  }
+}
