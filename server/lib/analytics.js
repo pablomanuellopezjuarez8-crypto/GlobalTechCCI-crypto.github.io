@@ -25,7 +25,8 @@ export async function visibleAssignments(studentId) {
   );
   return rows.map((row) => {
     const done = row.status === 'entregado' || row.status === 'revisado';
-    const score = done ? Number(row.final_score ?? row.suggested_score) : null;
+    const rawScore = row.final_score ?? row.suggested_score;
+    const score = done && rawScore !== null ? Number(rawScore) : null;
     return {
       assignmentId: row.id,
       kind: row.kind,

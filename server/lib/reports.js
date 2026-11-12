@@ -57,8 +57,8 @@ export function studentCsv(data, generatedAt = new Date()) {
       item.title,
       item.kind === 'reading' ? 'Lectura' : 'Reto',
       item.confirmed ? 'Revisado' : 'Entregado (valoración sugerida)',
-      String(item.score),
-      item.level.label,
+      item.score === null ? 'Sin datos' : String(item.score),
+      item.level ? item.level.label : 'Sin datos',
       item.confirmed ? 'Sí' : 'No',
     ]),
     ...data.pending.map((item) => [
@@ -224,8 +224,8 @@ export function studentPdf(res, data, generatedAt = new Date()) {
       ['Actividad', 'Puntaje', 'Nivel', 'Revisión'],
       data.completed.map((item) => [
         item.title,
-        item.score,
-        item.level.label,
+        item.score === null ? 'Sin datos' : item.score,
+        item.level ? item.level.label : 'Sin datos',
         item.confirmed ? 'Confirmado por el docente' : 'Valoración sugerida',
       ]),
     );
